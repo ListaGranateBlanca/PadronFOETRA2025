@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Consulta Lugar de Votación</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            margin-top: 50px;
+        }
+        input, button {
+            padding: 10px;
+            margin: 5px;
+            font-size: 16px;
+        }
+        #result {
+            margin-top: 20px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Consulta tu Lugar de Votación</h1>
+        <p>Ingresa tu número de documento:</p>
+        <input type="text" id="documentNumber" placeholder="Número de documento">
+        <button onclick="checkVotingPlace()">Consultar</button>
+        <div id="result"></div>
+    </div>
+
+    <script>
+        function checkVotingPlace() {
+            const documentNumber = document.getElementById('documentNumber').value;
+            const resultDiv = document.getElementById('result');
+
+            if (!documentNumber) {
+                resultDiv.textContent = "Por favor, ingresa un número de documento válido.";
+                return;
+            }
+
+            // Simulación de consulta desde un archivo JSON llamado "padron.json"
+            fetch('padron.json')
+                .then(response => response.json())
+                .then(padron => {
+                    const votingPlace = padron.find(entry => entry.DNI === documentNumber)?.votingPlace;
+
+                    if (votingPlace) {
+                        resultDiv.textContent = `Tu lugar de votación es: ${votingPlace}`;
+                    } else {
+                        resultDiv.textContent = "No se encontró información para este número de documento.";
+                    }
+                })
+                .catch(error => {
+                    resultDiv.textContent = "Hubo un error al consultar la base de datos.";
+                    console.error(error);
+                });
+        }
+    </script>
+</body>
+</html>
