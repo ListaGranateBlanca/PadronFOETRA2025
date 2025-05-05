@@ -45,18 +45,15 @@
             }
 
             // Simulación de consulta desde un archivo JSON llamado "padron.json"
-            fetch('padron.json')
+            fetch('https://raw.githubusercontent.com/juanwinograd/PadronFOETRA2025/refs/heads/main/padron.json')
                 .then(response => response.json())
                 .then(padron => {
-                    const persona = padron.find(entry => entry.DNI === documentNumber);
-                    
-                    console.log(documentNumber); // Para depuración, puedes ver el contenido del padrón en la consola.
-                    console.log(persona); // Para depuración, puedes ver el objeto persona en la consola.
+                    const persona = padron.find(entry => entry.DNI == documentNumber);
 
                     if (persona) {
-                        resultDiv.textContent = `${persona["NOMBRES"]} ${persona["APELLIDOS"]}
-                        <br> ${persona["LUGAR DE VOTACION"]}
-                        <br> Número de Orden: ${persona["N° Ord"]}`;
+                        resultDiv.innerHTML = `<p>${persona["NOMBRES"]} ${persona["APELLIDOS"]}</p>
+                       <p>${persona["LUGAR DE VOTACION"]}</p>
+                       <p>Número de Orden: ${persona["N° Ord"]}</p>`;
                     } else {
                         resultDiv.textContent = "No figura en el padrón electoral.";
                     }
