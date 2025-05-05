@@ -49,9 +49,12 @@
                 .then(response => response.json())
                 .then(padron => {
                     const persona = padron.find(entry => entry.DNI === documentNumber);
+                    
+                    console.log(persona); // Para depuración, puedes ver el objeto persona en la consola.
 
                     if (persona) {
-                        resultDiv.textContent = `${persona["NOMBRES"]} ${persona["APELLIDOS"]} - ${persona["LUGAR DE VOTACION"]}
+                        resultDiv.textContent = `${persona["NOMBRES"]} ${persona["APELLIDOS"]}
+                        <br> ${persona["LUGAR DE VOTACION"]}
                         <br> Número de Orden: ${persona["N° Ord"]}`;
                     } else {
                         resultDiv.textContent = "No figura en el padrón electoral.";
