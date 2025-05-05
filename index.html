@@ -50,6 +50,7 @@
                 .then(padron => {
                     const persona = padron.find(entry => entry.DNI === documentNumber);
                     
+                    console.log(padron); // Para depuración, puedes ver el contenido del padrón en la consola.
                     console.log(persona); // Para depuración, puedes ver el objeto persona en la consola.
 
                     if (persona) {
