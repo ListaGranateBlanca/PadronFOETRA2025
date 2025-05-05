@@ -52,7 +52,7 @@
 
                     if (persona) {
                         resultDiv.innerHTML = `<p>${persona["NOMBRES"]} ${persona["APELLIDOS"]}</p>
-                       <p>${persona["LUGAR DE VOTACION"]}</p>
+                       <p>Mesa ${persona["LUGAR DE VOTACION"]}</p>
                        <p>Número de Orden: ${persona["N° Ord"]}</p>`;
                     } else {
                         resultDiv.textContent = "No figura en el padrón electoral.";
