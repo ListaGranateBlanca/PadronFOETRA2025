@@ -48,12 +48,13 @@
             fetch('padron.json')
                 .then(response => response.json())
                 .then(padron => {
-                    const votingPlace = padron.find(entry => entry.DNI === documentNumber)?.votingPlace;
+                    const persona = padron.find(entry => entry.DNI === documentNumber);
 
-                    if (votingPlace) {
-                        resultDiv.textContent = `Tu lugar de votación es: ${votingPlace}`;
+                    if (persona) {
+                        resultDiv.textContent = `${persona["NOMBRES"]} ${persona["APELLIDOS"]} - ${persona["LUGAR DE VOTACION"]}
+                        <br> Número de Orden: ${persona["N° Ord"]}`;
                     } else {
-                        resultDiv.textContent = "No se encontró información para este número de documento.";
+                        resultDiv.textContent = "No figura en el padrón electoral.";
                     }
                 })
                 .catch(error => {
