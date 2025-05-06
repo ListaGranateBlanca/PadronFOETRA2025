@@ -27,11 +27,14 @@
 </head>
 <body>
     <div class="container">
-        <h1>Consulta tu Lugar de Votación</h1>
+        <h1>Elecciones FOETRA Buenos Aires</h1>
+        <h2>Consulta tu lugar de votación</h2>
         <p>Ingresa tu número de documento (sin puntos):</p>
         <input type="text" id="documentNumber" placeholder="Número de documento">
         <button onclick="checkVotingPlace()">Consultar</button>
         <div id="result"></div>
+        <p>Si necesitás realizar un cambio, escribir a <a href="mailto:juntaelectoralfoetra@gmail.com">juntaelectoralfoetra@gmail.com</a></p>
+            
     </div>
 
     <script>
@@ -44,7 +47,7 @@
                 return;
             }
 
-            // Simulación de consulta desde un archivo JSON llamado "padron.json"
+            // Consulta desde un archivo JSON llamado "padron.json"
             fetch('https://raw.githubusercontent.com/juanwinograd/PadronFOETRA2025/refs/heads/main/padron.json')
                 .then(response => response.json())
                 .then(padron => {
@@ -52,8 +55,7 @@
 
                     if (persona) {
                         resultDiv.innerHTML = `<p>${persona["NOMBRES"]} ${persona["APELLIDOS"]}</p>
-                       <p>Mesa ${persona["LUGAR DE VOTACION"]}</p>
-                       <p>Número de Orden: ${persona["N° Ord"]}</p>`;
+                       <p>Mesa ${persona["LUGAR DE VOTACION"]}</p>`;
                     } else {
                         resultDiv.textContent = "No figura en el padrón electoral.";
                     }
